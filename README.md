@@ -12,6 +12,10 @@
 
 [Starter code](https://github.com/coding-boot-camp/potential-enigma)
 
+NPM packages used:
+[inquirer](https://www.npmjs.com/package/inquirer)
+[email validator](https://www.npmjs.com/package/email-validator)
+
 ## License
 
 MIT License

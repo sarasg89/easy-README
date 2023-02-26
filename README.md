@@ -37,6 +37,14 @@ Run node to initialize the application
 
 Answer the questions when prompted. After the last question, a README file will be created and saved in the folder called generated_README_files.
 
+![Sample gif](./images/README%20generator.gif)
+
+![Generated file sample gif](./images/Generated%20README%20walkthrough.gif)
+
+[Link](https://drive.google.com/file/d/1aYTYxM4f7E7U3WBCO7O6K05iKL-QtD54/view) to video showing an example of how to use this application.
+
+[Link](https://drive.google.com/file/d/1Rts6_Lus1Jvmd7fbvST4D9puKcFUDfOd/view) to the walkthrough of the generated README file. 
+
 ### Screenshots
 
 ![terminal](./images/terminal.png)

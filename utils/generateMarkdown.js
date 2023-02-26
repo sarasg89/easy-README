@@ -116,7 +116,7 @@ function renderLicenseLink(license) {
     case "Microsoft Public License":
       return "[Microsoft Public License](https://opensource.org/license/ms-pl-html/)";
     case "MIT":
-      return "[MIT](https://opensource.org/licenses/MIT)";
+      return "[MIT License](https://opensource.org/licenses/MIT)";
     case "Mozilla Public License 2.0":
       return "[Mozilla Public License 2.0](https://opensource.org/licenses/MPL-2.0)";
     case "Open Software License 3.0":
@@ -139,76 +139,17 @@ function renderLicenseLink(license) {
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
 function renderLicenseSection(license, username) {
-  switch (license) {
-    case "Academic Free License v3.0":
-      return;
-    case "Apache license 2.0":
-      return;
-    case "Artistic license 2.0":
-      return;
-    case "Boost Software License 1.0":
-      return;
-    case "BSD 2-clause 'Simplified' license":
-      return;
-    case "BSD 3-clause Clear license":
-      return;
-    case "Creative Commons Zero v1.0 Universal":
-      return;
-    case "Creative Commons Attribution 4.0":
-      return;
-    case "Creative Commons Attribution Share Alike 4.0":
-      return;
-    case "Do What The F*ck You Want To Public License":
-      return;
-    case "Educational Community License v2.0":
-      return;
-    case "Eclipse Public License 1.0":
-      return;
-    case "Eclipse Public License 2.0":
-      return;
-    case "European Union Public License 1.1":
-      return;
-    case "GNU Affero General Public License v3.0":
-      return;
-    case "GNU General Public License v2.0":
-      return;
-    case "GNU General Public License v3.0":
-      return;
-    case "GNU Lesser General Public License v2.1":
-      return;
-    case "GNU Lesser General Public License v3.0":
-      return;
-    case "ISC":
-      return;
-    case "LaTeX Project Public License v1.3c":
-      return;
-    case "Microsoft Public License":
-      return;
-    case "MIT":
-      return;
-    case "Mozilla Public License 2.0":
-      return;
-    case "Open Software License 3.0":
-      return;
-    case "PostgreSQL License":
-      return;
-    case "SIL Open Font License 1.1":
-      return;
-    case "University of Illinois/NCSA Open Source License":
-      return;
-    case "The Unlicense":
-      return;
-    case "zLib License":
-      return;
-    default:
-      return "";
-  }
+  return `
+  This project is licensed by the ${renderLicenseLink(license)}  
+  Copyright (c) 2023 ${username}
+  `
 }
 
 // Function to generate markdown for README
 function generateMarkdown(data) {
   return `
   # ${data.project}
+  ${renderLicenseBadge(data.license)}
 
   ## Description
   ${data.description}
@@ -230,8 +171,6 @@ function generateMarkdown(data) {
   ## Credits
 
   ## License
-  ${renderLicenseBadge(data.license)} ${renderLicenseLink(data.license)}
-
   ${renderLicenseSection(data.license, data.username)}
   
   ## How to contribute

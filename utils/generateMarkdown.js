@@ -1,3 +1,6 @@
+const dayjs = require('dayjs')
+
+
 // Function that returns a license badge based on which license is passed in
 // If there is no license or the license badge doesn't exist, return an empty string
 function renderLicenseBadge(license) {
@@ -136,13 +139,15 @@ function renderLicenseLink(license) {
   }
 }
 
-// TODO: Create a function that returns the license section of README
+// Function that returns the license section of README
 // If there is no license, return an empty string
 function renderLicenseSection(license, username) {
-  return `
-  This project is licensed by the ${renderLicenseLink(license)}  
-  Copyright (c) 2023 ${username}
-  `
+  if (license === "") {
+    return ""
+  } else {
+    return `This project is licensed by the ${renderLicenseLink(license)} Copyright (c) ${dayjs().year()} ${username}`
+  }
+
 }
 
 // Function to generate markdown for README
@@ -152,32 +157,43 @@ function generateMarkdown(data) {
   ${renderLicenseBadge(data.license)}
 
   ## Description
+  
   ${data.description}
 
   ## Table of contents
+
   - [Installation](#installation)
   - [Usage](#usage)
   - [Credits](#credits)
   - [License](#license)
   - [How to contribute](#how-to-contribute)
   - [Tests](#tests)
+  - [Questions](#questions)
 
   ## Installation
+
   ${data.dependencies}
 
   ## Usage
+
   ${data.usage}
 
   ## Credits
 
   ## License
+
   ${renderLicenseSection(data.license, data.username)}
   
   ## How to contribute
+
   ${data.contributions}
 
   ## Tests
+
   ${data.test}
+
+  ## Questions
+  If you have any questions, please reach out to me via [email](mailto:${data.email}) or visit my [GitHub profile](https://github.com/${data.username}).
 `;
 }
 

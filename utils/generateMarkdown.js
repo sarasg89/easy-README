@@ -1,5 +1,5 @@
+// Packages needed for this application
 const dayjs = require('dayjs')
-
 
 // Function that returns a license badge based on which license is passed in
 // If there is no license or the license badge doesn't exist, return an empty string

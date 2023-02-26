@@ -3,6 +3,7 @@ const inquirer = require('inquirer');
 const validator = require('email-validator');
 const generateMarkdown = require('./utils/generateMarkdown');
 const fs = require('fs');
+const dayjs = require('dayjs')
 
 // Array of questions for user input
 const questions = [
@@ -153,13 +154,15 @@ function init() {
                                 default: "y",
                             }
                         ])
-                        .then((override) => {
-                            if (override) {
+                        .then((response) => {
+                            if (response.override) {
                                 writeToFile(fileName, generateMarkdown(data));
+                                console.log(override)
                             } else {
+                                var timeStamp = dayjs().unix()
                                 var projectName = data.project
                                 projectName = projectName.replace(/\s+/g,"-").toLowerCase();
-                                fileName = `./generated_README_files/README-${projectName}.md`;
+                                fileName = `./generated_README_files/README-${projectName}-${timeStamp}.md`;
                                 writeToFile(fileName, generateMarkdown(data));
                             }
                         })

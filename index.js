@@ -118,6 +118,20 @@ function init() {
                 type: "input",
                 message: usageQ,
                 name: "usage",
+                validate: function (input) {
+                    const done = this.async();
+                    setTimeout(function () {
+                        if (input === "") {
+                            done("You need to provide usage instructions");
+                            return;
+                        }
+                        if (input.length < 50) {
+                            done("Too short, please provide more instructions");
+                            return;
+                        }
+                        done(null, true);
+                    }, 50);
+                }
             },
             {
                 type: "input",
@@ -126,8 +140,35 @@ function init() {
             },
         ])
         .then((data) => {
-            const fileName = `./generated_README_files/README.md`;
-            writeToFile(fileName, generateMarkdown(data));
+            let fileName = "./generated_README_files/README.md";
+            const path = "./generated_README_files/README.md";
+            try {
+                if (fs.existsSync(path)) {
+                    inquirer
+                        .prompt([
+                            {
+                                type: "confirm",
+                                message: "This file name already exists, would you like to override it?",
+                                name: "override",
+                                default: "y",
+                            }
+                        ])
+                        .then((override) => {
+                            if (override) {
+                                writeToFile(fileName, generateMarkdown(data));
+                            } else {
+                                var projectName = data.project
+                                projectName = projectName.replace(/\s+/g,"-").toLowerCase();
+                                fileName = `./generated_README_files/README-${projectName}.md`;
+                                writeToFile(fileName, generateMarkdown(data));
+                            }
+                        })
+                } else {
+                    writeToFile(fileName, generateMarkdown(data));
+                }
+            } catch (err) {
+                console.error(err);
+            }
         });
 }
 
